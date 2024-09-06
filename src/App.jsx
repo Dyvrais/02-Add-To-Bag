@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartReg } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSol } from "@fortawesome/free-solid-svg-icons";
@@ -24,28 +25,36 @@ function App() {
     setQuant((prevQuant) => Math.max(prevQuant - 1, 1));
   };
 
+  const alert = () => {
+    Swal.fire({
+      text: "Item succesfully added to your cart",
+      icon: "success",
+      width: 400,
+    });
+  };
+
   const Product = ({ title, ogprice, newprice, discount, serial, rating }) => {
     const productImages = [Gundam1, Gundam2, Gundam3];
 
     return (
-      <main className="flex w-11/12 m-auto">
+      <main className="flex w-11/12 justify-center bg-white p-6 rounded-3xl">
         <div className="flex">
           <div className="flex gap-4 items-top">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
               <img
                 src={productImages[0]}
                 onClick={(e) => setCurrentImg(0)}
-                className="min-w-24 max-w-24 cursor-pointer"
+                className="min-w-24 max-w-28 p-1 border border-transparent hover:border-slate-800 cursor-pointer"
               ></img>
               <img
                 src={productImages[1]}
                 onClick={(e) => setCurrentImg(1)}
-                className="min-w-24 max-w-24 cursor-pointer"
+                className="min-w-24 max-w-28 p-1 border border-transparent hover:border-slate-800 cursor-pointer"
               ></img>
               <img
                 src={productImages[2]}
                 onClick={(e) => setCurrentImg(2)}
-                className="min-w-24 max-w-24 cursor-pointer"
+                className="min-w-24 max-w-28 p-1 border border-transparent hover:border-slate-800 cursor-pointer"
               ></img>
             </div>
           </div>
@@ -106,6 +115,7 @@ function App() {
 
           <button
             id="add-cart"
+            onClick={alert}
             className="px-8 py-2 my-3 border border-transparent bg-sky-500 hover:bg-sky-600 rounded-2xl text-xs text-white"
           >
             ADD TO CART
